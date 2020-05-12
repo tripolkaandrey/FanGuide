@@ -19,6 +19,6 @@ namespace FanGuide.Models
         public string Origin { get; set; }
         public string Team { get; set; }
         public Sport Sport { get; set; }
-        public byte SportId { get; set; }
+        public int SportId { get; set; }
     }
 }

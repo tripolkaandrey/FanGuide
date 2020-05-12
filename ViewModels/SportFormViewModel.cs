@@ -4,13 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace FanGuide.Models
+namespace FanGuide.ViewModels
 {
-    public class Sport
+    public class SportFormViewModel
     {
-        public int Id  { get; set; }
-
-        [Required(ErrorMessage = "Please enter name")]
+        public int? Id { get; set; }
         [StringLength(255)]
         public string Name { get; set; }
     }

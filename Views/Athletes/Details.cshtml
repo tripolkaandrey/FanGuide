@@ -1,0 +1,16 @@
+﻿@model FanGuide.Models.Athlete
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+
+<ul>
+    <li>Name: @Model.Name</li>
+    <li>Sport: @Model.Sport.Name</li>
+    <li>Height: @Model.Height</li>
+    <li>Weight: @Model.Weight</li>
+    <li>Age: @Model.Age</li>
+</ul>
+

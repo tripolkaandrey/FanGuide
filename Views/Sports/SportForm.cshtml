@@ -1,0 +1,25 @@
+﻿@model FanGuide.ViewModels.SportFormViewModel
+@{
+    ViewBag.Title = "SportForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add a new sport</h2>
+
+@using (Html.BeginForm("Save", "Sports"))
+{
+    @Html.ValidationSummary(true, "Fix")
+    <div class="form-group">
+        @Html.LabelFor(x => x.Name)
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+    @Html.HiddenFor(x => x.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

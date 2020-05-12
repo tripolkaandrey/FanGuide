@@ -3,87 +3,80 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FanGuide.Models;
+using FanGuide.ViewModels;
 
 namespace FanGuide.Controllers
 {
     public class SportsController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public SportsController()
+        {
+            _context = new ApplicationDbContext();
+        }
         // GET: Sports
         public ActionResult Index()
         {
-            return View();
+            var sports = _context.Sports.ToList();
+            return View(sports);
         }
 
-        // GET: Sports/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: Sports/Create
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new SportFormViewModel();
+            return View("SportForm", viewModel);
         }
 
-        // POST: Sports/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Sports/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var sport = _context.Sports.SingleOrDefault(x => x.Id == id);
+            if (sport == null)
+                return HttpNotFound();
+            return View("SportForm", sport);
         }
 
-        // POST: Sports/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Sports/Delete/5
+
         public ActionResult Delete(int id)
         {
-            return View();
+            var sport = _context.Sports.SingleOrDefault(x => x.Id == id);
+            if (sport == null)
+                return HttpNotFound();
+            _context.Sports.Remove(sport);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Sports");
         }
 
-        // POST: Sports/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Save(Sport sport)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add delete logic here
+                return View("SportForm");
+            }
+            if (sport.Id == 0)
+            {
+                _context.Sports.Add(sport);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+
+            else
             {
-                return View();
+                var sportInDb = _context.Sports.Single(s => s.Id == sport.Id);
+                sportInDb.Id = sport.Id;
+                sportInDb.Name = sport.Name;
             }
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Sports");
         }
+
     }
 }

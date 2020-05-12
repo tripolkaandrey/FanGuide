@@ -1,0 +1,27 @@
+﻿@model IEnumerable<FanGuide.Models.Sport>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Athletes @Html.ActionLink("Create", "Create", "Sports", new { @class = "btn btn-primary" })</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Sport</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sport in Model)
+        {
+            <tr>
+                <td>@sport.Name</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Sports", new { id = sport.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", "Sports", new { id = sport.Id }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
