@@ -85,6 +85,12 @@ namespace FanGuide.Controllers
                 };
                 return View("TeamForm", viewModel);
             }
+            bool nameAlreadyExists = _context.Teams.SingleOrDefault(t => t.Name == team.Name) != null;
+            if (nameAlreadyExists)
+            {
+                ModelState.AddModelError(string.Empty, "Team already exists.");
+                return View("TeamForm");
+            }
             if (team.Id == 0)
             {
                 _context.Teams.Add(team);

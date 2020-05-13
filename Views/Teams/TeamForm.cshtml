@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm("Save", "Teams"))
 {
-    @Html.ValidationSummary(true, "Fix")
+    @Html.ValidationSummary(true)
     <div class="form-group">
         @Html.LabelFor(x => x.Name)
         @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })

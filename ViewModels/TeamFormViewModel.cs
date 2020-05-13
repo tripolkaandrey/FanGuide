@@ -11,6 +11,9 @@ namespace FanGuide.ViewModels
     {
         public IEnumerable<Sport> Sports { get; set; }
         public int? Id { get; set; }
+        [Required]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [StringLength(255)]
         public string Name { get; set; }
         [Display(Name = "Sport")]
         public int? SportId { get; set; }

@@ -162,9 +162,16 @@
     <Compile Include="Migrations\202005131159358_AddedSexFieldToAthlete.designer.cs">
       <DependentUpon>202005131159358_AddedSexFieldToAthlete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005131556303_AddedValidation.cs" />
+    <Compile Include="Migrations\202005131556303_AddedValidation.designer.cs">
+      <DependentUpon>202005131556303_AddedValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AgeValidation.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Athlete.cs" />
+    <Compile Include="Models\MeasurementsValidation.cs" />
+    <Compile Include="Models\SexValidation.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,6 +185,8 @@
     <Content Include="App_Data\ApplicationDb_log.ldf">
       <DependentUpon>ApplicationDb.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-dark.css" />
+    <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -256,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005131159358_AddedSexFieldToAthlete.resx">
       <DependentUpon>202005131159358_AddedSexFieldToAthlete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005131556303_AddedValidation.resx">
+      <DependentUpon>202005131556303_AddedValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

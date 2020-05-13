@@ -20,7 +20,7 @@ namespace FanGuide.Controllers
         }
         // GET: Athletes
         [HttpGet]
-        public async Task<ActionResult> Index(string sortOrder, string search)
+        public ActionResult Index(string sortOrder, string search)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
@@ -28,7 +28,7 @@ namespace FanGuide.Controllers
 
             if (!String.IsNullOrEmpty(search))
             {
-                athletes = athletes.Where(s => s.Name.Contains(search) || s.Sport.Name.Contains(search));
+                athletes = athletes.Where(s => s.Name.ToLower().Contains(search) || s.Sport.Name.ToLower().Contains(search));
             }
             switch(sortOrder)
             {
@@ -39,7 +39,7 @@ namespace FanGuide.Controllers
                 athletes = athletes.OrderBy(s => s.Name);
                 break;
             }
-            return View(await athletes.ToListAsync());
+            return View(athletes.ToList());
         }
 
         // GET: Athletes/Details/5
@@ -57,6 +57,7 @@ namespace FanGuide.Controllers
             var sports = _context.Sports.ToList();
             var viewModel = new AthleteFormViewModel()
             {
+                Athlete = new Athlete(),
                 Sports = sports
             };
             return View("AthleteForm",viewModel);
@@ -70,8 +71,9 @@ namespace FanGuide.Controllers
             if (athlete == null)
                 return HttpNotFound();
             var sports = _context.Sports.ToList();
-            var viewModel = new AthleteFormViewModel(athlete)
+            var viewModel = new AthleteFormViewModel()
             {
+                Athlete = athlete,
                 Sports = sports
             };
             return View("AthleteForm", viewModel);
@@ -95,11 +97,23 @@ namespace FanGuide.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new AthleteFormViewModel(athlete)
+                var viewModel = new AthleteFormViewModel()
                 {
+                    Athlete = athlete,
                     Sports = _context.Sports.ToList()
                 };
                 return View("AthleteForm", viewModel);
+            }
+            bool nameAlreadyExists = _context.Athletes.SingleOrDefault(a => a.Name == athlete.Name) != null;
+            if (nameAlreadyExists)
+            {
+                ModelState.AddModelError(string.Empty, "Athlete already exists.");
+                var viewModel = new AthleteFormViewModel()
+                {
+                    Athlete = athlete,
+                    Sports = _context.Sports.ToList()
+                };
+                return View("AthleteForm",viewModel);
             }
             if (athlete.Id == 0)
             {

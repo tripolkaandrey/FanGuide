@@ -62,9 +62,15 @@ namespace FanGuide.Controllers
         [HttpPost]
         public ActionResult Save(Sport sport)
         {
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (!ModelState.IsValid)
             {
+                return View("SportForm");
+            }
+
+            bool nameAlreadyExists = _context.Sports.SingleOrDefault(s => s.Name == sport.Name) != null;
+            if (nameAlreadyExists)
+            {
+                ModelState.AddModelError(string.Empty, "Sport already exists.");
                 return View("SportForm");
             }
             if (sport.Id == 0)
