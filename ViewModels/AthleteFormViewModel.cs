@@ -15,9 +15,14 @@ namespace FanGuide.ViewModels
         public string Name { get; set; }
         [Display(Name = "Sport")]
         public int? SportId { get; set; }
+        [Display(Name = "Team")]
+        public int? TeamId { get; set; }
         public double? Weight { get; set; }
 
         public double? Height { get; set; }
+        public string Citizenship { get; set; }
+        public string Origin { get; set; }
+
         public int Age { get; set; }
 
         public AthleteFormViewModel()
@@ -30,9 +35,12 @@ namespace FanGuide.ViewModels
             Id = athlete.Id;
             Name = athlete.Name;
             SportId = athlete.SportId;
+            TeamId = athlete.TeamId;
             Weight = athlete.Weight;
             Height = athlete.Height;
             Age = athlete.Age;
+            Citizenship = athlete.Citizenship;
+            Origin = athlete.Origin;
         }
 
     }

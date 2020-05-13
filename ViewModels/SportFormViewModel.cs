@@ -8,8 +8,7 @@ namespace FanGuide.ViewModels
 {
     public class SportFormViewModel
     {
-        public int? Id { get; set; }
-        [StringLength(255)]
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

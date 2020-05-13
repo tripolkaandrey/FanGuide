@@ -6,11 +6,15 @@ using System.Web;
 
 namespace FanGuide.Models
 {
-    public class Sport
+    public class Team
     {
-        public int Id  { get; set; }
+        public int Id { get; set; }
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
+        public Sport Sport { get; set; }
+        [Display(Name = "Sport")]
+        [Required]
+        public int SportId { get; set; }
     }
 }

@@ -38,7 +38,12 @@ namespace FanGuide.Controllers
             var sport = _context.Sports.SingleOrDefault(x => x.Id == id);
             if (sport == null)
                 return HttpNotFound();
-            return View("SportForm", sport);
+            var viewModel = new SportFormViewModel()
+            {
+                Name = sport.Name,
+                Id = sport.Id
+            };
+            return View("SportForm", viewModel);
         }
 
 
@@ -57,6 +62,7 @@ namespace FanGuide.Controllers
         [HttpPost]
         public ActionResult Save(Sport sport)
         {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (!ModelState.IsValid)
             {
                 return View("SportForm");

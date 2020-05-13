@@ -1,0 +1,34 @@
+﻿@model IEnumerable<FanGuide.Models.Team>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Teams @Html.ActionLink("Create", "Create", "Teams", new { @class = "btn btn-primary" })</h2>
+@using (Html.BeginForm("Index", "Teams", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("search")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Team</th>
+        <th>Sport</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var team in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(team.Name, "Details", "Teams", new { id = team.Id }, null)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Teams", new { id = team.Id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Delete", "Delete", "Teams", new { id = team.Id }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
