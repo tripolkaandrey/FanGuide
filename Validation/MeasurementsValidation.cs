@@ -13,12 +13,12 @@ namespace FanGuide.Models
             var athlete = (Athlete)validationContext.ObjectInstance;
             if (athlete.Height <= 140 )
             {
-                return new ValidationResult("Height should be valid");
+                return new ValidationResult("Height should be valid(>140)");
             }
 
-            if (athlete.Weight <= 50)
+            if (athlete.Weight <= 40)
             {
-                return new ValidationResult("Weight should be valid");
+                return new ValidationResult("Weight should be valid(>40)");
             }
             return ValidationResult.Success;
         }

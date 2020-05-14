@@ -6,11 +6,51 @@
 
 <h2>@Model.Name</h2>
 
-<ul>
-    <li>Name: @Model.Name</li>
-    <li>Sport: @Model.Sport.Name</li>
-    <li>Height: @Model.Height</li>
-    <li>Weight: @Model.Weight</li>
-    <li>Age: @Model.Age</li>
-</ul>
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Property</th>
+        <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td> @Model.Name</td>
+        </tr>
+        <tr>
+            <td>Sport</td>
+            <td> @Model.Sport.Name</td>
+        </tr>
+        <tr>
+            <td>Team</td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>Height</td>
+            <td> @Model.Height</td>
+        </tr>
+        <tr>
+            <td>Weight</td>
+            <td> @Model.Weight</td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td> @Model.Age</td>
+        </tr>
+        <tr>
+            <td>Citizenship</td>
+            <td> @Model.Citizenship</td>
+        </tr>
+        <tr>
+            <td>Origin</td>
+            <td> @Model.Origin</td>
+        </tr>
+        <tr>
+            <td>Achievements</td>
+            <td> @Model.Achievements</td>
+        </tr>
+    </tbody>
+</table>
+
 

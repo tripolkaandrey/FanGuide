@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,9 +7,10 @@ using FanGuide.Models;
 
 namespace FanGuide.ViewModels
 {
-    public class AthleteFormViewModel
+    public class AthletesListViewModel
     {
-        public IEnumerable<Sport> Sports { get; set; }
-        public Athlete Athlete;
+        public IEnumerable<Athlete> Athletes { get; set; }
+        public SelectList Sports { get; set; }
+
     }
 }

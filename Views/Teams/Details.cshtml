@@ -4,13 +4,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
-
-<ul>
-    <li>Name: @Model.Name</li>
-    <li>Sport: @Model.SportId</li>
-    @foreach (var athlete in Model.Athletes)
-    {
-        <li>@athlete</li>
-    }
-</ul>
+<h2>@Model.Team.Name</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Sport</td>
+            <td>@Model.Team.Sport.Name</td>
+        </tr>
+        <tr>
+            <td>Athletes</td>
+            <td>
+                <ul>
+                    @foreach (var athlete in Model.Athletes)
+                    {
+                        <li>@athlete.Name</li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>

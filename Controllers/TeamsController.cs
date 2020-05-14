@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -27,10 +28,11 @@ namespace FanGuide.Controllers
         // GET: Teams/Details/5
         public ActionResult Details(int id)
         {
-            var team = _context.Teams.SingleOrDefault(x => x.Id == id);
+            var team = _context.Teams.Include(x => x.Sport).SingleOrDefault(x => x.Id == id);
             var athletes = _context.Athletes.Where(x => x.TeamId == id).ToList();
-            var viewModel = new TeamDetailsViewModel(team)
+            var viewModel = new TeamDetailsViewModel()
             {
+                Team = team,
                 Athletes = athletes
             };
             return View(viewModel);
@@ -44,38 +46,11 @@ namespace FanGuide.Controllers
             {
                 Sports = sports
             };
-            return View("TeamForm", viewModel);
-        }
-
-
-        // GET: Teams/Edit/5
-        public ActionResult Edit(int id)
-        {
-            var team = _context.Teams.SingleOrDefault(x => x.Id == id);
-            if (team == null)
-                return HttpNotFound();
-            var athletes = _context.Athletes.ToList();
-            var viewModel = new TeamDetailsViewModel(team)
-            {
-                Athletes = athletes
-            };
-            return View("TeamForm", viewModel);
-        }
-
-
-        // GET: Teams/Delete/5
-        public ActionResult Delete(int id)
-        {
-            var team = _context.Teams.SingleOrDefault(x => x.Id == id);
-            if (team == null)
-                return HttpNotFound();
-            _context.Teams.Remove(team);
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Teams");
+            return View("TeamCreateForm", viewModel);
         }
 
         [HttpPost]
-        public ActionResult Save(Team team)
+        public ActionResult Create(Team team)
         {
             if (!ModelState.IsValid)
             {
@@ -83,28 +58,60 @@ namespace FanGuide.Controllers
                 {
                     Sports = _context.Sports.ToList()
                 };
-                return View("TeamForm", viewModel);
+                return View("TeamCreateForm", viewModel);
             }
             bool nameAlreadyExists = _context.Teams.SingleOrDefault(t => t.Name == team.Name) != null;
+
             if (nameAlreadyExists)
             {
                 ModelState.AddModelError(string.Empty, "Team already exists.");
-                return View("TeamForm");
+                return View("TeamCreateForm");
             }
-            if (team.Id == 0)
+            _context.Teams.Add(team);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Teams");
+        }
+
+
+        // GET: Teams/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var team = _context.Teams.SingleOrDefault(x => x.Id == id);
+
+            if (team == null)
+                return HttpNotFound();
+
+            return View("TeamEditForm", team);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Team team)
+        {
+            if (!ModelState.IsValid)
             {
-                _context.Teams.Add(team);
+                return View("TeamEditForm", team);
             }
-            else
-            {
-                var teamInDb = _context.Athletes.Single(m => m.Id == team.Id);
-                teamInDb.Id = team.Id;
-                teamInDb.Name = team.Name;
-                teamInDb.SportId = team.SportId;
-            }
+            var teamInDb = _context.Teams.Single(m => m.Id == team.Id);
+            teamInDb.Name = team.Name;
+
 
             _context.SaveChanges();
             return RedirectToAction("Index", "Teams");
         }
+
+
+        // GET: Teams/Delete/5
+        public ActionResult Delete(int id)
+        {
+            var team = _context.Teams.SingleOrDefault(x => x.Id == id);
+
+            if (team == null)
+                return HttpNotFound();
+
+            _context.Teams.Remove(team);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Teams");
+        }
+
     }
 }

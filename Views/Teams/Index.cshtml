@@ -5,13 +5,7 @@
 }
 
 <h2>Teams @Html.ActionLink("Create", "Create", "Teams", new { @class = "btn btn-primary" })</h2>
-@using (Html.BeginForm("Index", "Teams", FormMethod.Get))
-{
-    <p>
-        Find by name: @Html.TextBox("search")
-        <input type="submit" value="Search" />
-    </p>
-}
+
 <table class="table table-bordered table-hover">
     <thead>
     <tr>

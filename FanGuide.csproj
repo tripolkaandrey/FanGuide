@@ -167,17 +167,19 @@
       <DependentUpon>202005131556303_AddedValidation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AgeValidation.cs" />
+    <Compile Include="Validation\AgeValidation.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Athlete.cs" />
-    <Compile Include="Models\MeasurementsValidation.cs" />
-    <Compile Include="Models\SexValidation.cs" />
+    <Compile Include="Validation\MeasurementsValidation.cs" />
+    <Compile Include="Validation\SexValidation.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AthleteAddToTeamViewModel.cs" />
     <Compile Include="ViewModels\AthleteFormViewModel.cs" />
-    <Compile Include="ViewModels\SportFormViewModel.cs" />
+    <Compile Include="ViewModels\AthletesListViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailsViewModel.cs" />
+    <Compile Include="ViewModels\TeamEditFormViewModel.cs" />
     <Compile Include="ViewModels\TeamFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -222,13 +224,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Navbar.cshtml" />
     <Content Include="Views\Athletes\Index.cshtml" />
-    <Content Include="Views\Athletes\AthleteForm.cshtml" />
+    <Content Include="Views\Athletes\AthleteСreateForm.cshtml" />
     <Content Include="Views\Athletes\Details.cshtml" />
     <Content Include="Views\Sports\Index.cshtml" />
     <Content Include="Views\Sports\SportForm.cshtml" />
     <Content Include="Views\Teams\Index.cshtml" />
+    <Content Include="Views\Teams\TeamCreateForm.cshtml" />
+    <Content Include="Views\Athletes\AthleteEditForm.cshtml" />
+    <Content Include="Views\Teams\TeamEditForm.cshtml" />
     <Content Include="Views\Teams\Details.cshtml" />
-    <Content Include="Views\Teams\TeamForm.cshtml" />
+    <Content Include="Views\Athletes\ChangeTeam.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

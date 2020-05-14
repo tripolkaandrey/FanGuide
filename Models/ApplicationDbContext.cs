@@ -10,7 +10,6 @@ namespace FanGuide.Models
     {
         public DbSet<Athlete> Athletes { get; set; }
         public DbSet<Sport> Sports { get; set; }
-
         public DbSet<Team> Teams { get; set; }
     }
 }

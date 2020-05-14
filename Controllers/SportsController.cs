@@ -27,8 +27,30 @@ namespace FanGuide.Controllers
         // GET: Sports/Create
         public ActionResult Create()
         {
-            var viewModel = new SportFormViewModel();
+            var viewModel = new Sport();
             return View("SportForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Create(Sport sport)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("SportForm");
+            }
+
+            bool nameAlreadyExists = _context.Sports.SingleOrDefault(s => s.Name == sport.Name) != null;
+
+            if (nameAlreadyExists)
+            {
+                ModelState.AddModelError(string.Empty, "Sport already exists.");
+                return View("SportForm");
+            }
+
+            _context.Sports.Add(sport);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Sports");
         }
 
 
@@ -36,14 +58,26 @@ namespace FanGuide.Controllers
         public ActionResult Edit(int id)
         {
             var sport = _context.Sports.SingleOrDefault(x => x.Id == id);
+
             if (sport == null)
                 return HttpNotFound();
-            var viewModel = new SportFormViewModel()
+
+            return View("SportForm", sport);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Sport sport)
+        {
+            if (!ModelState.IsValid)
             {
-                Name = sport.Name,
-                Id = sport.Id
-            };
-            return View("SportForm", viewModel);
+                return View("SportForm", sport);
+            }
+
+            var sportInDb = _context.Sports.Single(s => s.Id == sport.Id);
+            sportInDb.Name = sport.Name;
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Sports");
         }
 
 
@@ -52,43 +86,13 @@ namespace FanGuide.Controllers
         public ActionResult Delete(int id)
         {
             var sport = _context.Sports.SingleOrDefault(x => x.Id == id);
+
             if (sport == null)
                 return HttpNotFound();
+
             _context.Sports.Remove(sport);
             _context.SaveChanges();
             return RedirectToAction("Index", "Sports");
         }
-
-        [HttpPost]
-        public ActionResult Save(Sport sport)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("SportForm");
-            }
-
-            bool nameAlreadyExists = _context.Sports.SingleOrDefault(s => s.Name == sport.Name) != null;
-            if (nameAlreadyExists)
-            {
-                ModelState.AddModelError(string.Empty, "Sport already exists.");
-                return View("SportForm");
-            }
-            if (sport.Id == 0)
-            {
-                _context.Sports.Add(sport);
-            }
-
-
-            else
-            {
-                var sportInDb = _context.Sports.Single(s => s.Id == sport.Id);
-                sportInDb.Id = sport.Id;
-                sportInDb.Name = sport.Name;
-            }
-
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Sports");
-        }
-
     }
 }

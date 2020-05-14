@@ -1,12 +1,12 @@
 ﻿@model FanGuide.ViewModels.AthleteFormViewModel
 @{
-    ViewBag.Title = "AthleteForm";
+    ViewBag.Title = "AthleteEditForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Add a new athlete</h2>
+<h2>Edit the Athlete</h2>
 
-@using (Html.BeginForm("Save", "Athletes"))
+@using (Html.BeginForm("Edit", "Athletes"))
 {
     @Html.ValidationSummary(true)
     <div class="form-group">
@@ -18,11 +18,6 @@
         @Html.LabelFor(x => x.Athlete.SportId)
         @Html.DropDownListFor(x => x.Athlete.SportId, new SelectList(Model.Sports, "Id", "Name"), "Select Sport", new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.Athlete.SportId)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Athlete.Sex)
-        @Html.TextBoxFor(x => x.Athlete.Sex, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Athlete.Sex)
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.Athlete.Weight)

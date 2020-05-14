@@ -19,7 +19,7 @@ namespace FanGuide.Models
             {
                 return new ValidationResult("Sex is required");
             }
-            return new ValidationResult("Sex should be valid");
+            return new ValidationResult("Sex should be valid(Man/Woman)");
         }
     }
 }

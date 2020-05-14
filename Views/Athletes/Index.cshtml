@@ -1,16 +1,24 @@
-﻿@model IEnumerable<FanGuide.Models.Athlete>
+﻿@model FanGuide.ViewModels.AthletesListViewModel
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Athletes @Html.ActionLink("Create", "Create", "Athletes", new { @class = "btn btn-primary" })</h2>
-@using (Html.BeginForm("Index","Athletes", FormMethod.Get))
+@using (Html.BeginForm("Index", "Athletes", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("search")
+        Find: @Html.TextBox("search")
         <input type="submit" value="Search" />
     </p>
+
+    <form method="get">
+        <label class="control-label">Sport: </label>
+        @Html.DropDownList("sportId", Model.Sports as SelectList,
+            htmlAttributes: new { @class = "form-control"})
+
+        <input type="submit" value="Фильтр" class="btn btn-primary" />
+    </form>
 }
 <table class="table table-bordered table-hover">
     <thead>
@@ -21,16 +29,22 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var athlete in Model)
+        @foreach (var athlete in Model.Athletes)
         {
             <tr>
                 <td>@Html.ActionLink(athlete.Name, "Details", "Athletes", new { id = athlete.Id }, null)</td>
                 <td>@athlete.Sport.Name</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" }) |
-                    @Html.ActionLink("Delete", "Delete", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Change Team", "ChangeTeam", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" })
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

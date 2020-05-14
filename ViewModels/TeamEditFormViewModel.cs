@@ -6,10 +6,9 @@ using FanGuide.Models;
 
 namespace FanGuide.ViewModels
 {
-    public class TeamDetailsViewModel
+    public class TeamEditFormViewModel
     {
-        public List<Athlete> Athletes { get; set; }
         public Team Team { get; set; }
-
+        public IEnumerable<Athlete> Athletes { get; set; }
     }
 }
