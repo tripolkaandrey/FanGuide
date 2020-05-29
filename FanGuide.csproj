@@ -134,25 +134,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005290736341_InitialModel.cs" />
-    <Compile Include="Migrations\202005290736341_InitialModel.designer.cs">
-      <DependentUpon>202005290736341_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\202005292004509_InitialModel.cs" />
+    <Compile Include="Migrations\202005292004509_InitialModel.designer.cs">
+      <DependentUpon>202005292004509_InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005290739480_PopulateSports.cs" />
-    <Compile Include="Migrations\202005290739480_PopulateSports.designer.cs">
-      <DependentUpon>202005290739480_PopulateSports.cs</DependentUpon>
+    <Compile Include="Migrations\202005292007385_PopulateSports.cs" />
+    <Compile Include="Migrations\202005292007385_PopulateSports.designer.cs">
+      <DependentUpon>202005292007385_PopulateSports.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005290906076_ModelChange.cs" />
-    <Compile Include="Migrations\202005290906076_ModelChange.designer.cs">
-      <DependentUpon>202005290906076_ModelChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005290906493_PopulateTeamRoles.cs" />
-    <Compile Include="Migrations\202005290906493_PopulateTeamRoles.designer.cs">
-      <DependentUpon>202005290906493_PopulateTeamRoles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005291551048_ChangedInitialModel.cs" />
-    <Compile Include="Migrations\202005291551048_ChangedInitialModel.designer.cs">
-      <DependentUpon>202005291551048_ChangedInitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\202005292017153_PopulateTeamRoles.cs" />
+    <Compile Include="Migrations\202005292017153_PopulateTeamRoles.designer.cs">
+      <DependentUpon>202005292017153_PopulateTeamRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Folder\Achievement.cs" />
@@ -239,23 +231,16 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202005290736341_InitialModel.resx">
-      <DependentUpon>202005290736341_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005292004509_InitialModel.resx">
+      <DependentUpon>202005292004509_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005290739480_PopulateSports.resx">
-      <DependentUpon>202005290739480_PopulateSports.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005292007385_PopulateSports.resx">
+      <DependentUpon>202005292007385_PopulateSports.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005290906076_ModelChange.resx">
-      <DependentUpon>202005290906076_ModelChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005290906493_PopulateTeamRoles.resx">
-      <DependentUpon>202005290906493_PopulateTeamRoles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005291551048_ChangedInitialModel.resx">
-      <DependentUpon>202005291551048_ChangedInitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005292017153_PopulateTeamRoles.resx">
+      <DependentUpon>202005292017153_PopulateTeamRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

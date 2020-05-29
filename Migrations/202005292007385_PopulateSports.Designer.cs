@@ -7,13 +7,13 @@ namespace FanGuide.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class InitialModel : IMigrationMetadata
+    public sealed partial class PopulateSports : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PopulateSports));
         
         string IMigrationMetadata.Id
         {
-            get { return "202005290736341_InitialModel"; }
+            get { return "202005292007385_PopulateSports"; }
         }
         
         string IMigrationMetadata.Source

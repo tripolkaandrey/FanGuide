@@ -21,7 +21,7 @@ namespace FanGuide.Controllers
         }
         // GET: Athletes
         [HttpGet]
-        public ActionResult Index(string sortOrder, string search, int? sportId,bool? RecordmanSearch)
+        public ActionResult Index(string sortOrder, string search, int? sportId,bool RecordmanSearch = false)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
@@ -37,9 +37,10 @@ namespace FanGuide.Controllers
                 athletes = athletes.Where(s => s.SportId == sportId);
             }
 
-            if (RecordmanSearch != null)
+            if (RecordmanSearch && athletes.Count() != 0)
             {
-                athletes = athletes.OrderByDescending(x => x.Achievements.Sum(y => (byte)y.Type));
+                var res = athletes.Select(x => x.Achievements).Min(x => x.Sum(z => (byte) z.Type));
+                athletes = athletes.Where(x => x.Achievements.Sum(z => (byte)z.Type) == res);
             }
             switch (sortOrder)
             {
@@ -61,7 +62,7 @@ namespace FanGuide.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var athlete = _context.Athletes.Include(x => x.Sport).Include(x=>x.Achievements).Include(x => x.Team).SingleOrDefault(x=>x.Id==id);
+            var athlete = _context.Athletes.Include(x => x.Sport).Include(x=>x.Achievements).Include(x => x.Team).Include(x => x.TeamRole).SingleOrDefault(x=>x.Id==id);
 
             if (athlete == null)
                 return HttpNotFound();
@@ -169,7 +170,7 @@ namespace FanGuide.Controllers
             if (athlete == null)
                 return HttpNotFound();
 
-            var teams = _context.Teams.Where(x => x.SportId == athlete.SportId);
+            var teams = _context.Teams.Where(x => x.SportId == athlete.SportId && x.Size != _context.Athletes.Select(y => y.TeamId).Count());
             var viewModel = new AthleteChangeTeamViewModel()
             {
                 Teams = teams,
@@ -184,9 +185,9 @@ namespace FanGuide.Controllers
             var athleteInDb = _context.Athletes.Single(x => x.Id == athlete.Id);
 
             athleteInDb.TeamId = athlete.TeamId;
-            athleteInDb.TeamRole = athlete.TeamRole;
+            athleteInDb.TeamRoleId = athlete.TeamRoleId;
             _context.SaveChanges();
-            return RedirectToAction("Details", "Athletes", athleteInDb.Id);
+            return RedirectToAction("Details", "Athletes",new {id = athlete.Id});
         }
 
         [HttpGet]
@@ -212,7 +213,7 @@ namespace FanGuide.Controllers
 
             athleteInDb.Achievements = athlete.Achievements;
             _context.SaveChanges();
-            return RedirectToAction("Index", "Athletes");
+            return RedirectToAction("Details", "Athletes",new {id = athlete.Id});
         }
 
 

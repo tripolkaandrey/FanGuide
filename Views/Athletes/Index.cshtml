@@ -5,7 +5,7 @@
 }
 
 <h2>Athletes @Html.ActionLink("Create", "Create", "Athletes", new { @class = "btn btn-primary" })</h2>
-@using (Html.BeginForm("Index", "Athletes", FormMethod.Get))
+@using (Html.BeginForm("Index", "Athletes", FormMethod.Get, new { @id = "SearchForm"}))
 {
     <p>
         @Html.TextBox("search", "", new { @class = "form-control", style = "display:inline-block;" })
@@ -14,38 +14,45 @@
 
     <form method="get">
         @Html.DropDownList("sportId", Model.Sports as SelectList, "Select Sport",
-            new { @class = "form-control", style = "display:inline-block;" })
-
-        <input type="submit" value="Фильтр" class="btn btn-primary" />
-    </form>
-    <form method="get">
-        @Html.CheckBox("RecordmanSearch", new { @class = "form-control", style = "display:inline-block;" })
-        <input type="submit" value="Фильтр" class="btn btn-primary" />
+            new { @class = "form-control", style = "display:inline-block;", id = "Sport" })
+        @Html.CheckBox("RecordmanSearch", new { @class = "form-control", id="RecordSearch"})
+        <input type="submit" value="Фильтр" class="btn btn-primary" style="display: none"/>
     </form>
 }
 <table class="table table-bordered table-hover">
     <thead>
-        <tr>
-            <th>Athlete @Html.ActionLink("Sort", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
-            <th>Sport</th>
-            <th>Action</th>
-        </tr>
+    <tr>
+        <th>Athlete @Html.ActionLink("Sort", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+        <th>Sport</th>
+        <th>Action</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var athlete in Model.Athletes)
-        {
-            <tr>
-                <td>@Html.ActionLink(athlete.Name, "Details", "Athletes", new { id = athlete.Id }, null)</td>
-                <td>@athlete.Sport.Name</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" }) |
-                    @Html.ActionLink("Delete", "Delete", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
-        }
+    @foreach (var athlete in Model.Athletes)
+    {
+        <tr>
+            <td>@Html.ActionLink(athlete.Name, "Details", "Athletes", new { id = athlete.Id }, null)</td>
+            <td>@athlete.Sport.Name</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Delete", "Delete", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
+
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#Sport').change(
+            function() {
+                $('#SearchForm').submit();
+            });
+        $('#RecordSearch').change(
+            function () {
+                $('#SearchForm').submit();
+            });
+    </script>
 }
