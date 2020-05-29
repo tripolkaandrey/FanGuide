@@ -1,6 +1,6 @@
 ﻿@model FanGuide.Models.Athlete
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Athlete Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,8 +23,15 @@
             <td> @Model.Sport.Name</td>
         </tr>
         <tr>
-            <td>Team</td>
-            <td> </td>
+            <td>Team/Role | @Html.ActionLink("Change", "ChangeTeam", "Athletes", new { id = Model.Id }, new { @class = "btn btn-primary" })</td>
+            <td>
+                @if (Model.Team != null)
+                {
+                    @Model.Team.Name
+                    <p>/</p>
+                    @Model.TeamRoleId
+                }
+            </td>
         </tr>
         <tr>
             <td>Height</td>
@@ -47,8 +54,16 @@
             <td> @Model.Origin</td>
         </tr>
         <tr>
-            <td>Achievements</td>
-            <td> @Model.Achievements</td>
+            <td>Achievements | @Html.ActionLink("Add Achievements", "AddAchievement", "Athletes", new { id = Model.Id }, new { @class = "btn btn-primary" })</td>
+            <td><ul>
+                @if (Model.Achievements != null)
+                {
+                    foreach (var achievement in Model.Achievements)
+                    {
+                        <li>@achievement.Type.ToString()</li>
+                    }
+                }
+            </ul></td>
         </tr>
     </tbody>
 </table>

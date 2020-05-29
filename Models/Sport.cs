@@ -10,8 +10,10 @@ namespace FanGuide.Models
     {
         public int Id  { get; set; }
         [Required]
-        [StringLength(255)]
+        [StringLength(30)]
         [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Use English letters only please")]
         public string Name { get; set; }
+        [Required]
+        public bool isTeamSport { get; set; }
     }
 }

@@ -134,52 +134,41 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005120738036_InitialModel.cs" />
-    <Compile Include="Migrations\202005120738036_InitialModel.designer.cs">
-      <DependentUpon>202005120738036_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\202005290736341_InitialModel.cs" />
+    <Compile Include="Migrations\202005290736341_InitialModel.designer.cs">
+      <DependentUpon>202005290736341_InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005120745135_PopulateSports.cs" />
-    <Compile Include="Migrations\202005120745135_PopulateSports.designer.cs">
-      <DependentUpon>202005120745135_PopulateSports.cs</DependentUpon>
+    <Compile Include="Migrations\202005290739480_PopulateSports.cs" />
+    <Compile Include="Migrations\202005290739480_PopulateSports.designer.cs">
+      <DependentUpon>202005290739480_PopulateSports.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005120746049_PopulateAthletes.cs" />
-    <Compile Include="Migrations\202005120746049_PopulateAthletes.designer.cs">
-      <DependentUpon>202005120746049_PopulateAthletes.cs</DependentUpon>
+    <Compile Include="Migrations\202005290906076_ModelChange.cs" />
+    <Compile Include="Migrations\202005290906076_ModelChange.designer.cs">
+      <DependentUpon>202005290906076_ModelChange.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005121118345_AddedAttributeToSportName.cs" />
-    <Compile Include="Migrations\202005121118345_AddedAttributeToSportName.designer.cs">
-      <DependentUpon>202005121118345_AddedAttributeToSportName.cs</DependentUpon>
+    <Compile Include="Migrations\202005290906493_PopulateTeamRoles.cs" />
+    <Compile Include="Migrations\202005290906493_PopulateTeamRoles.designer.cs">
+      <DependentUpon>202005290906493_PopulateTeamRoles.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005121443267_RemovedRequiredFromSportName.cs" />
-    <Compile Include="Migrations\202005121443267_RemovedRequiredFromSportName.designer.cs">
-      <DependentUpon>202005121443267_RemovedRequiredFromSportName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005131020026_RewriteInitialModel.cs" />
-    <Compile Include="Migrations\202005131020026_RewriteInitialModel.designer.cs">
-      <DependentUpon>202005131020026_RewriteInitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005131159358_AddedSexFieldToAthlete.cs" />
-    <Compile Include="Migrations\202005131159358_AddedSexFieldToAthlete.designer.cs">
-      <DependentUpon>202005131159358_AddedSexFieldToAthlete.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005131556303_AddedValidation.cs" />
-    <Compile Include="Migrations\202005131556303_AddedValidation.designer.cs">
-      <DependentUpon>202005131556303_AddedValidation.cs</DependentUpon>
+    <Compile Include="Migrations\202005291551048_ChangedInitialModel.cs" />
+    <Compile Include="Migrations\202005291551048_ChangedInitialModel.designer.cs">
+      <DependentUpon>202005291551048_ChangedInitialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Validation\AgeValidation.cs" />
+    <Compile Include="Folder\Achievement.cs" />
+    <Compile Include="Folder\Sex.cs" />
+    <Compile Include="Models\TeamRole.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Athlete.cs" />
-    <Compile Include="Validation\MeasurementsValidation.cs" />
-    <Compile Include="Validation\SexValidation.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AthleteAddToTeamViewModel.cs" />
-    <Compile Include="ViewModels\AthleteFormViewModel.cs" />
+    <Compile Include="ViewModels\AthleteAddAchievementViewModel.cs" />
+    <Compile Include="ViewModels\AthleteChangeTeamViewModel.cs" />
+    <Compile Include="ViewModels\AthleteEditFormViewModel.cs" />
+    <Compile Include="ViewModels\AthleteCreateFormViewModel.cs" />
     <Compile Include="ViewModels\AthletesListViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailsViewModel.cs" />
-    <Compile Include="ViewModels\TeamEditFormViewModel.cs" />
     <Compile Include="ViewModels\TeamFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -224,18 +213,18 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Navbar.cshtml" />
     <Content Include="Views\Athletes\Index.cshtml" />
-    <Content Include="Views\Athletes\AthleteСreateForm.cshtml" />
+    <Content Include="Views\Athletes\CreateForm.cshtml" />
     <Content Include="Views\Athletes\Details.cshtml" />
     <Content Include="Views\Sports\Index.cshtml" />
     <Content Include="Views\Sports\SportForm.cshtml" />
     <Content Include="Views\Teams\Index.cshtml" />
-    <Content Include="Views\Teams\TeamCreateForm.cshtml" />
-    <Content Include="Views\Athletes\AthleteEditForm.cshtml" />
-    <Content Include="Views\Teams\TeamEditForm.cshtml" />
+    <Content Include="Views\Teams\CreateForm.cshtml" />
+    <Content Include="Views\Athletes\EditForm.cshtml" />
+    <Content Include="Views\Teams\EditForm.cshtml" />
     <Content Include="Views\Teams\Details.cshtml" />
     <Content Include="Views\Athletes\ChangeTeam.cshtml" />
+    <Content Include="Views\Athletes\AddAchievement.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -250,31 +239,23 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202005120738036_InitialModel.resx">
-      <DependentUpon>202005120738036_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005290736341_InitialModel.resx">
+      <DependentUpon>202005290736341_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005120745135_PopulateSports.resx">
-      <DependentUpon>202005120745135_PopulateSports.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005290739480_PopulateSports.resx">
+      <DependentUpon>202005290739480_PopulateSports.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005120746049_PopulateAthletes.resx">
-      <DependentUpon>202005120746049_PopulateAthletes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005290906076_ModelChange.resx">
+      <DependentUpon>202005290906076_ModelChange.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005121118345_AddedAttributeToSportName.resx">
-      <DependentUpon>202005121118345_AddedAttributeToSportName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005290906493_PopulateTeamRoles.resx">
+      <DependentUpon>202005290906493_PopulateTeamRoles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005121443267_RemovedRequiredFromSportName.resx">
-      <DependentUpon>202005121443267_RemovedRequiredFromSportName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005131020026_RewriteInitialModel.resx">
-      <DependentUpon>202005131020026_RewriteInitialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005131159358_AddedSexFieldToAthlete.resx">
-      <DependentUpon>202005131159358_AddedSexFieldToAthlete.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005131556303_AddedValidation.resx">
-      <DependentUpon>202005131556303_AddedValidation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005291551048_ChangedInitialModel.resx">
+      <DependentUpon>202005291551048_ChangedInitialModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

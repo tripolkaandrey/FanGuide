@@ -1,6 +1,6 @@
-﻿@model FanGuide.ViewModels.AthleteAddToTeamViewModel
+﻿@model FanGuide.ViewModels.AthleteChangeTeamViewModel
 @{
-    ViewBag.Title = "AddToTeam";
+    ViewBag.Title = "Change team";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,6 +13,11 @@
         @Html.LabelFor(x => x.Athlete.TeamId)
         @Html.DropDownListFor(x => x.Athlete.TeamId, new SelectList(Model.Teams, "Id", "Name"), "Select Team", new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.Athlete.TeamId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Athlete.TeamRoleId)
+        @Html.DropDownListFor(x => x.Athlete.TeamRoleId, new SelectList(Model.TeamRoles, "Id", "Name"), "Select Team Role", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Athlete.TeamRoleId)
     </div>
     @Html.HiddenFor(x => x.Athlete.Id)
     <button type="submit" class="btn btn-primary">Save</button>
