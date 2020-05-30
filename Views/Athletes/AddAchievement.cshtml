@@ -11,11 +11,11 @@
     @Html.ValidationSummary(true)
     <div class="form-group">
         @Html.LabelFor(x => x.Achievement)
-        @Html.DropDownList("achievement",new SelectList(Model.AchievementsList, "Value", "Text"), "Select Achievement", new { @class = "form-control" })
+        @Html.DropDownList("achievement", new SelectList(Model.AchievementsList, "Value", "Text"), "Select Achievement", new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.Achievement)
     </div>
     @Html.HiddenFor(x => x.Athlete.Id)
     <button type="submit" class="btn btn-primary">Save</button>
-
+    @Html.ActionLink("Back", "Details", "Athletes", new {id = Model.Athlete.Id}, new { @class = "btn btn-primary" })
 }
 

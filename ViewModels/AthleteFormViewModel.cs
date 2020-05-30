@@ -10,7 +10,7 @@ using FanGuide.Models;
 namespace FanGuide.ViewModels
 {
 
-    public class AthleteCreateFormViewModel
+    public class AthleteFormViewModel
     {
         public IEnumerable<Sport> Sports { get; set; }
         public IEnumerable<SelectListItem> SexList

@@ -29,7 +29,9 @@ namespace FanGuide.Controllers
         public ActionResult Details(int id)
         {
             var team = _context.Teams.Include(x => x.Sport).SingleOrDefault(x => x.Id == id);
-            var athletes = _context.Athletes.Include(x=>x.TeamRole).Where(x => x.TeamId == id).ToList();
+            var athletes = _context.Athletes.Include(x=>x.TeamRole)
+                                        .Where(x => x.TeamId == id).ToList();
+
             var viewModel = new TeamDetailsViewModel()
             {
                 Team = team,
@@ -41,7 +43,7 @@ namespace FanGuide.Controllers
         // GET: Teams/Create
         public ActionResult Create()
         {
-            var sports = _context.Sports.ToList();
+            var sports = _context.Sports.Where(x=> x.isTeamSport).ToList();
             var viewModel = new TeamFormViewModel()
             {
                 Sports = sports
@@ -89,7 +91,7 @@ namespace FanGuide.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("TeamEditForm", team);
+                return View("EditForm", team);
             }
             var teamInDb = _context.Teams.Single(m => m.Id == team.Id);
             teamInDb.Name = team.Name;

@@ -1,4 +1,4 @@
-﻿@model FanGuide.ViewModels.AthleteCreateFormViewModel
+﻿@model FanGuide.ViewModels.AthleteFormViewModel
 @{
     ViewBag.Title = "Add a new athlete";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,6 +24,7 @@
         @Html.DropDownListFor(x => x.Athlete.Sex.Type, Model.SexList, new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.Athlete.Sex.Type)
     </div>
+
     <div class="form-group">
         @Html.LabelFor(x => x.Athlete.Weight)
         @Html.TextBoxFor(x => x.Athlete.Weight, new { @class = "form-control" })
@@ -51,6 +52,8 @@
     </div>
     @Html.HiddenFor(x => x.Athlete.Id)
     <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Back", "Index", "Athletes", new { @class = "btn btn-primary" })
+
 }
 
 

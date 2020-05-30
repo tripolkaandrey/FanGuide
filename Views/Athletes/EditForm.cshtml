@@ -1,4 +1,4 @@
-﻿@model FanGuide.ViewModels.AthleteCreateFormViewModel
+﻿@model FanGuide.ViewModels.AthleteFormViewModel
 @{
     ViewBag.Title = "Edit the Athlete";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.Athlete.SportId)
-        @Html.DropDownListFor(x => x.Athlete.SportId, new SelectList(Model.Sports, "Id", "Name"), Model.Athlete.Sport.Name, new { @class = "form-control" })
+        @Html.DropDownListFor(x => x.Athlete.SportId, new SelectList(Model.Sports, "Id", "Name"), new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.Athlete.SportId)
     </div>
     <div class="form-group">
@@ -41,6 +41,8 @@
     </div>
     @Html.HiddenFor(x => x.Athlete.Id)
     <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Back", "Index", "Athletes", new { @class = "btn btn-primary" })
+
 }
 
 @section scripts

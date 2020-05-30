@@ -30,7 +30,10 @@ namespace FanGuide.Controllers
 
             if (!string.IsNullOrEmpty(search))
             {
-                athletes = athletes.Where(s => s.Name.ToLower().Contains(search) || s.Sport.Name.ToLower().Contains(search) || s.Citizenship.ToLower().Contains(search) || s.Origin.ToLower().Contains(search));
+                athletes = athletes.Where(s => s.Name.ToLower().Contains(search)
+                                               || s.Sport.Name.ToLower().Contains(search)
+                                               || s.Citizenship.ToLower().Contains(search)
+                                               || s.Origin.ToLower().Contains(search));
             }
             if (sportId != null)
             {
@@ -39,7 +42,8 @@ namespace FanGuide.Controllers
 
             if (RecordmanSearch && athletes.Count() != 0)
             {
-                var res = athletes.Select(x => x.Achievements).Min(x => x.Sum(z => (byte) z.Type));
+                var res = athletes.Select(x => x.Achievements)
+                    .Min(x => x.Sum(z => (byte) z.Type));
                 athletes = athletes.Where(x => x.Achievements.Sum(z => (byte)z.Type) == res);
             }
             switch (sortOrder)
@@ -62,7 +66,9 @@ namespace FanGuide.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var athlete = _context.Athletes.Include(x => x.Sport).Include(x=>x.Achievements).Include(x => x.Team).Include(x => x.TeamRole).SingleOrDefault(x=>x.Id==id);
+            var athlete = _context.Athletes.Include(x => x.Sport)
+                .Include(x=>x.Achievements).Include(x => x.Team)
+                .Include(x => x.TeamRole).SingleOrDefault(x=>x.Id==id);
 
             if (athlete == null)
                 return HttpNotFound();
@@ -75,7 +81,7 @@ namespace FanGuide.Controllers
         public ActionResult Create()
         {
             var sports = _context.Sports.ToList();
-            var viewModel = new AthleteCreateFormViewModel()
+            var viewModel = new AthleteFormViewModel()
             {
                 Athlete = new Athlete(),
                 Sports = sports
@@ -88,7 +94,7 @@ namespace FanGuide.Controllers
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError(string.Empty, "Wrong Input");
-                var viewModel = new AthleteCreateFormViewModel()
+                var viewModel = new AthleteFormViewModel()
                 {
                     Athlete = athlete,
                     Sports = _context.Sports.ToList(),
@@ -101,7 +107,7 @@ namespace FanGuide.Controllers
             if (nameAlreadyExists)
             {
                 ModelState.AddModelError(string.Empty, "The Athlete already exists.");
-                var viewModel = new AthleteCreateFormViewModel()
+                var viewModel = new AthleteFormViewModel()
                 {
                     Athlete = athlete,
                     Sports = _context.Sports.ToList()
@@ -125,7 +131,7 @@ namespace FanGuide.Controllers
                 return HttpNotFound();
 
             var sports = _context.Sports.ToList();
-            var viewModel = new AthleteCreateFormViewModel()
+            var viewModel = new AthleteFormViewModel()
             {
                 Athlete = athlete,
                 Sports = sports
@@ -137,7 +143,7 @@ namespace FanGuide.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new AthleteCreateFormViewModel()
+                var viewModel = new AthleteFormViewModel()
                 {
                     Athlete = athlete,
                     Sports = _context.Sports.ToList()
@@ -170,7 +176,7 @@ namespace FanGuide.Controllers
             if (athlete == null)
                 return HttpNotFound();
 
-            var teams = _context.Teams.Where(x => x.SportId == athlete.SportId && x.Size != _context.Athletes.Select(y => y.TeamId).Count());
+            var teams = _context.Teams.Where(x => x.SportId == athlete.SportId && x.Size != _context.Athletes.Count(y => y.TeamId == x.Id));
             var viewModel = new AthleteChangeTeamViewModel()
             {
                 Teams = teams,

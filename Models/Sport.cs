@@ -13,7 +13,7 @@ namespace FanGuide.Models
         [StringLength(30)]
         [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Use English letters only please")]
         public string Name { get; set; }
-        [Required]
-        public bool isTeamSport { get; set; }
+
+        [Required] public bool isTeamSport { get; set; } = false;
     }
 }
