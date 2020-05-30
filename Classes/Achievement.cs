@@ -7,8 +7,8 @@
     }
     public enum AchievementType : byte
     {
-        GoldMedal,
-        SilverMedal,
         BronzeMedal,
+        SilverMedal,
+        GoldMedal,
     }
 }

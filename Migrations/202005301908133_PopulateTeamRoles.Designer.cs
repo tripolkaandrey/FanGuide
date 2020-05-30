@@ -13,7 +13,7 @@ namespace FanGuide.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202005292017153_PopulateTeamRoles"; }
+            get { return "202005301908133_PopulateTeamRoles"; }
         }
         
         string IMigrationMetadata.Source

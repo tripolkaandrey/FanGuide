@@ -13,7 +13,7 @@ namespace FanGuide.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202005292004509_InitialModel"; }
+            get { return "202005301905073_InitialModel"; }
         }
         
         string IMigrationMetadata.Source

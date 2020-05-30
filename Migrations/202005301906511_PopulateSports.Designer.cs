@@ -13,7 +13,7 @@ namespace FanGuide.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202005292007385_PopulateSports"; }
+            get { return "202005301906511_PopulateSports"; }
         }
         
         string IMigrationMetadata.Source

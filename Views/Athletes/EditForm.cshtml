@@ -40,6 +40,7 @@
         @Html.ValidationMessageFor(x => x.Athlete.Citizenship)
     </div>
     @Html.HiddenFor(x => x.Athlete.Id)
+
     <button type="submit" class="btn btn-primary">Save</button>
     @Html.ActionLink("Back", "Index", "Athletes", new { @class = "btn btn-primary" })
 

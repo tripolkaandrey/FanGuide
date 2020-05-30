@@ -2,7 +2,7 @@
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class InitialModel : DbMigration
     {
         public override void Up()
@@ -32,7 +32,7 @@
                 .Index(t => t.TeamId)
                 .Index(t => t.TeamRoleId)
                 .Index(t => t.SportId);
-            
+
             CreateTable(
                 "dbo.Achievements",
                 c => new
@@ -42,9 +42,9 @@
                         Athlete_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Athletes", t => t.Athlete_Id)
+                .ForeignKey("dbo.Athletes", t => t.Athlete_Id,true)
                 .Index(t => t.Athlete_Id);
-            
+
             CreateTable(
                 "dbo.Sexes",
                 c => new
@@ -53,7 +53,7 @@
                         Type = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Sports",
                 c => new
@@ -63,7 +63,7 @@
                         isTeamSport = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Teams",
                 c => new
@@ -76,7 +76,7 @@
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Sports", t => t.SportId, cascadeDelete: true)
                 .Index(t => t.SportId);
-            
+
             CreateTable(
                 "dbo.TeamRoles",
                 c => new
@@ -88,9 +88,9 @@
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Sports", t => t.SportId, cascadeDelete: true)
                 .Index(t => t.SportId);
-            
+
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Athletes", "TeamRoleId", "dbo.TeamRoles");

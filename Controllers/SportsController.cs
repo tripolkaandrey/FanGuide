@@ -12,10 +12,13 @@ namespace FanGuide.Controllers
     public class SportsController : Controller
     {
         private IRepository<Sport> Sports_db;
+        private IRepository<Team> Teams_db;
+
 
         public SportsController()
         {
             Sports_db = new SportsRepository();
+            Teams_db = new TeamsRepository();
         }
         // GET: Sports
         public ActionResult Index()
@@ -49,7 +52,6 @@ namespace FanGuide.Controllers
             }
 
             Sports_db.Create(sport);
-            Sports_db.Save();
 
             return RedirectToAction("Index", "Sports");
         }
@@ -73,9 +75,17 @@ namespace FanGuide.Controllers
             {
                 return View("SportForm", sport);
             }
-
-            Sports_db.Update(sport);
-            Sports_db.Save();
+            var sportInDb = Sports_db.Get(sport.Id);
+            sportInDb.Name = sport.Name;
+            if (sportInDb.isTeamSport != sport.isTeamSport)
+            {
+                var teams = Teams_db.GetList().Where(x => x.SportId == sport.Id);
+                foreach (var team in teams)
+                {
+                    Teams_db.Delete(team.Id);
+                }
+            }
+            Sports_db.Update(sportInDb);
             return RedirectToAction("Index", "Sports");
         }
 
@@ -90,7 +100,6 @@ namespace FanGuide.Controllers
                 return HttpNotFound();
 
             Sports_db.Delete(id);
-            Sports_db.Save();
             return RedirectToAction("Index", "Sports");
         }
     }

@@ -92,7 +92,6 @@ namespace FanGuide.Controllers
                 return View("CreateForm");
             }
             Teams_db.Create(team);
-            Teams_db.Save();
             return RedirectToAction("Index", "Teams");
         }
 
@@ -115,8 +114,10 @@ namespace FanGuide.Controllers
             {
                 return View("EditForm", team);
             }
-            Teams_db.Update(team);
-            Teams_db.Save();
+
+            var teamInDb = Teams_db.Get(team.Id);
+            teamInDb.Name = team.Name;
+            Teams_db.Update(teamInDb);
             return RedirectToAction("Index", "Teams");
         }
 

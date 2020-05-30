@@ -50,7 +50,7 @@ namespace FanGuide.Controllers
             if (RecordmanSearch && athletes.Count() != 0)
             {
                 var res = athletes.Select(x => x.Achievements)
-                    .Min(x => x.Sum(z => (byte)z.Type));
+                    .Max(x => x.Sum(z => (byte)z.Type));
                 athletes = athletes.Where(x => x.Achievements.Sum(z => (byte)z.Type) == res);
             }
 
@@ -123,7 +123,6 @@ namespace FanGuide.Controllers
             }
 
             Athletes_db.Create(athlete);
-            Athletes_db.Save();
 
             return RedirectToAction("Index", "Athletes");
         }
@@ -158,8 +157,16 @@ namespace FanGuide.Controllers
                 return View("EditForm",viewModel);
             }
 
-            Athletes_db.Update(athlete);
-            Athletes_db.Save();
+            var athleteInDb = Athletes_db.Get(athlete.Id);
+            athleteInDb.Name = athlete.Name;
+            athleteInDb.SportId = athlete.SportId;
+            athleteInDb.Weight = athlete.Weight;
+            athleteInDb.Height = athlete.Height;
+            athleteInDb.Age = athlete.Age;
+            athleteInDb.Citizenship = athlete.Citizenship;
+
+            Athletes_db.Update(athleteInDb);
+
             return RedirectToAction("Index", "Athletes");
         }
 
@@ -185,8 +192,10 @@ namespace FanGuide.Controllers
         [HttpPost]
         public ActionResult ChangeTeam(Athlete athlete)
         {
-            Athletes_db.Update(athlete);
-            Athletes_db.Save();
+            var athleteInDb = Athletes_db.Get(athlete.Id);
+            athleteInDb.TeamId = athlete.TeamId;
+            athleteInDb.TeamRoleId = athlete.TeamRoleId;
+            Athletes_db.Update(athleteInDb);
             return RedirectToAction("Details", "Athletes",new {id = athlete.Id});
         }
 
@@ -208,8 +217,9 @@ namespace FanGuide.Controllers
         [HttpPost]
         public ActionResult AddAchievement(Athlete athlete, AchievementType achievement)
         {
-            athlete.Achievements.Add(new Achievement() { Type = achievement });
-            Athletes_db.Update(athlete);
+            var athleteInDb = Athletes_db.Get(athlete.Id);
+            athleteInDb.Achievements.Add(new Achievement() { Type = achievement });
+            Athletes_db.Update(athleteInDb);
             return RedirectToAction("Details", "Athletes",new {id = athlete.Id});
         }
 
@@ -217,7 +227,6 @@ namespace FanGuide.Controllers
         public ActionResult Delete(int id)
         {
             Athletes_db.Delete(id);
-            Athletes_db.Save();
             return RedirectToAction("Index","Athletes");
         }
     }

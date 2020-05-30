@@ -31,19 +31,13 @@ namespace FanGuide.Domain
         public void Create(Athlete item)
         {
             _context.Athletes.Add(item);
+            Save();
         }
 
         public void Update(Athlete item)
         {
-            var athleteInDb = _context.Athletes.Single(m => m.Id == item.Id);
-
-            athleteInDb.Name = item.Name;
-            athleteInDb.SportId = item.SportId;
-            athleteInDb.Weight = item.Weight;
-            athleteInDb.Height = item.Height;
-            athleteInDb.Age = item.Age;
-            athleteInDb.Citizenship = item.Citizenship;
-            athleteInDb.Achievements = item.Achievements;
+            _context.Entry(item).State = EntityState.Modified;
+            Save();
         }
 
         public void Delete(int id)
@@ -52,6 +46,7 @@ namespace FanGuide.Domain
 
             if (athlete != null)
                 _context.Athletes.Remove(athlete);
+            Save();
         }
 
         public void Save()

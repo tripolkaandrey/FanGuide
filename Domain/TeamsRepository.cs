@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -24,18 +25,19 @@ namespace FanGuide.Domain
 
         public Team Get(int id)
         {
-            return _context.Teams.Find(id);
+            return _context.Teams.SingleOrDefault(x=>x.Id == id);
         }
 
         public void Create(Team item)
         {
             _context.Teams.Add(item);
+            Save();
         }
 
         public void Update(Team item)
         {
-            var teamInDb = _context.Teams.Single(m => m.Id == item.Id);
-            teamInDb.Name = item.Name;
+            _context.Entry(item).State = EntityState.Modified;
+            Save();
         }
 
         public void Delete(int id)
@@ -44,6 +46,7 @@ namespace FanGuide.Domain
 
             if (team != null)
                 _context.Teams.Remove(team);
+            Save();
         }
 
         public void Save()

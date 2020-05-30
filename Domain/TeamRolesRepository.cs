@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -10,45 +11,45 @@ namespace FanGuide.Domain
 {
     public class TeamRolesRepository:IRepository<TeamRole>
     {
-        private ApplicationDbContext TeamRoles_db;
+        private ApplicationDbContext _context;
         private bool disposed = false;
         public TeamRolesRepository()
         {
-            TeamRoles_db = new ApplicationDbContext();
+            _context = new ApplicationDbContext();
         }
 
         public IEnumerable<TeamRole> GetList(params Expression<Func<TeamRole, object>>[] includes)
         {
-            return TeamRoles_db.TeamRoles.IncludeMultiple<TeamRole>(includes);
+            return _context.TeamRoles.IncludeMultiple<TeamRole>(includes);
         }
 
         public TeamRole Get(int id)
         {
-            return TeamRoles_db.TeamRoles.Find(id);
+            return _context.TeamRoles.Find(id);
         }
 
         public void Create(TeamRole item)
         {
-            TeamRoles_db.TeamRoles.Add(item);
+            _context.TeamRoles.Add(item);
         }
 
         public void Update(TeamRole item)
         {
-            var teamRoleInDb = TeamRoles_db.TeamRoles.Single(m => m.Id == item.Id);
-            teamRoleInDb.Name = item.Name;
+            _context.Entry(item).State = EntityState.Modified;
+
         }
 
         public void Delete(int id)
         {
-            var teamRole = TeamRoles_db.TeamRoles.SingleOrDefault(x => x.Id == id);
+            var teamRole = _context.TeamRoles.SingleOrDefault(x => x.Id == id);
 
             if (teamRole != null)
-                TeamRoles_db.TeamRoles.Remove(teamRole);
+                _context.TeamRoles.Remove(teamRole);
         }
 
         public void Save()
         {
-            TeamRoles_db.SaveChanges();
+            _context.SaveChanges();
         }
 
         public virtual void Dispose(bool disposing)
@@ -57,7 +58,7 @@ namespace FanGuide.Domain
             {
                 if (disposing)
                 {
-                    TeamRoles_db.Dispose();
+                    _context.Dispose();
                 }
             }
             this.disposed = true;
