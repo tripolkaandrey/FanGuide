@@ -23,15 +23,17 @@
             <td>Sport</td>
             <td> @Model.Sport.Name</td>
         </tr>
-        <tr>
-            <td>Team/Role | @Html.ActionLink("Change", "ChangeTeam", "Athletes", new { id = Model.Id }, new { @class = "btn btn-primary" })</td>
+    <tr>
+        @if(@Model.Sport.isTeamSport){
+            <td>Team/Role | @Html.ActionLink("Change", "ChangeTeam", "Athletes", new {id = Model.Id}, new {@class = "btn btn-primary"})</td>
             <td>
                 @if (Model.Team != null)
                 {
                     <p>@Model.Team.Name | @Model.TeamRole.Name</p>
                 }
             </td>
-        </tr>
+        }
+    </tr>
         <tr>
             <td>Height</td>
             <td> @Model.Height</td>
@@ -53,7 +55,7 @@
             <td> @Model.Origin</td>
         </tr>
         <tr>
-            <td>Achievements | @Html.ActionLink("Add Achievements", "AddAchievement", "Athletes", new { id = Model.Id }, new { @class = "btn btn-primary" })</td>
+            <td>Achievements | @Html.ActionLink("Award", "AddAchievement", "Athletes", new { id = Model.Id }, new { @class = "btn btn-primary" })</td>
             <td><ul>
                 @if (Model.Achievements != null)
                 {

@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.isTeamSport)
-        @Html.CheckBoxFor(x => x.isTeamSport, new { @class = "form-control" })
+        @Html.CheckBoxFor(x => x.isTeamSport)
         @Html.ValidationMessageFor(x => x.isTeamSport)
     </div>
     @Html.HiddenFor(x => x.Id)

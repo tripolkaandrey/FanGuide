@@ -1,28 +1,62 @@
-﻿@model IEnumerable<FanGuide.Models.Team>
+﻿@using System.Activities.Statements
+@model FanGuide.ViewModels.TeamListViewModel
 @{
     ViewBag.Title = "Teams";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Teams @Html.ActionLink("Create", "Create", "Teams", new { @class = "btn btn-primary" })</h2>
+@using (Html.BeginForm("Index", "Teams", FormMethod.Get, new { @id = "SearchForm" }))
+{
+    <p>
+        @Html.TextBox("search", "", new { @class = "form-control", style = "display:inline-block;", id = "search-box" })
+        @Html.DropDownList("sportId", Model.Sports as SelectList, "Select Sport",
+            new { @class = "form-control", style = "display:inline-block;", id = "Sport" })
+        <input type="submit" value="Search" class="btn btn-primary" style="display:none" />
+    </p>
+}
 
-<table class="table table-bordered table-hover">
-    <thead>
-    <tr>
-        <th>Team</th>
-        <th>Sport</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var team in Model)
-    {
-        <tr>
-            <td>@Html.ActionLink(team.Name, "Details", "Teams", new { id = team.Id }, null)</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Teams", new { id = team.Id }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Delete", "Delete", "Teams", new { id = team.Id }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
+    @if (Model.Teams.Count() != 0) {
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Sport</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var team in Model.Teams)
+            {
+                <tr>
+                    <td>@Html.ActionLink(team.Name, "Details", "Teams", new {id = team.Id}, null)</td>
+                    <td>@team.Sport.Name</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Teams", new {id = team.Id}, new {@class = "btn btn-primary"}) |
+                        @Html.ActionLink("Delete", "Delete", "Teams", new {id = team.Id}, new {@class = "btn btn-primary"})
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     }
-    </tbody>
-</table>
+    else
+    {
+        <h2>Oops,no teams have been found...</h2>
+    }
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#search-box').focus();
+        $('#search-box').on('change',
+            function () {
+                $('#SearchForm').submit();
+            });
+        $('#Sport').change(
+            function() {
+                $('#SearchForm').submit();
+            });
+    </script>
+}

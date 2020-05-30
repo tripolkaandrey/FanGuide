@@ -7,36 +7,43 @@
 <h2>Athletes @Html.ActionLink("Create", "Create", "Athletes", new { @class = "btn btn-primary" })</h2>
 @using (Html.BeginForm("Index", "Athletes", FormMethod.Get, new { @id = "SearchForm" }))
 {
-<p>
-    @Html.TextBox("search", "", new { @class = "form-control", style = "display:inline-block;",id="search-box" })
-    @Html.DropDownList("sportId", Model.Sports as SelectList, "Select Sport",
-        new { @class = "form-control", style = "display:inline-block;", id = "Sport" })
-    Find Recordman:@Html.CheckBox("RecordmanSearch", new { @class = "form-check-input", style = "display:inline-block;", id = "RecordSearch" })
-    <input type="submit" value="Search" class="btn btn-primary" style="display:none"/>
-</p>
+    <p>
+        @Html.TextBox("search", "", new { @class = "form-control", style = "display:inline-block;", id = "search-box" })
+        @Html.DropDownList("sportId", Model.Sports as SelectList, "Select Sport",
+            new { @class = "form-control", style = "display:inline-block;", id = "Sport" })
+        Find Recordman:@Html.CheckBox("RecordmanSearch", new { @class = "form-check-input", style = "display:inline-block;", id = "RecordSearch" })
+        <input type="submit" value="Search" class="btn btn-primary" style="display:none" />
+    </p>
 }
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Athlete @Html.ActionLink("Sort", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
-            <th>Sport</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var athlete in Model.Athletes)
-        {
+@if (Model.Athletes.Count() != 0)
+{
+    <table class="table table-bordered table-hover">
+        <thead>
             <tr>
-                <td>@Html.ActionLink(athlete.Name, "Details", "Athletes", new { id = athlete.Id }, null)</td>
-                <td>@athlete.Sport.Name</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" }) |
-                    @Html.ActionLink("Delete", "Delete", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" })
-                </td>
+                <th>Athlete @Html.ActionLink("Sort", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+                <th>Sport</th>
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var athlete in Model.Athletes)
+            {
+                <tr>
+                    <td>@Html.ActionLink(athlete.Name, "Details", "Athletes", new { id = athlete.Id }, null)</td>
+                    <td>@athlete.Sport.Name</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Delete", "Delete", "Athletes", new { id = athlete.Id }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>Oops,no athletes have been found...</h2>
+}
 
 @section scripts
 {

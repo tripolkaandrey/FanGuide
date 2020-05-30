@@ -127,10 +127,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Classes\RepositoryHelper.cs" />
     <Compile Include="Controllers\AthletesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SportsController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
+    <Compile Include="Domain\AthletesRepository.cs" />
+    <Compile Include="Domain\IRepository.cs" />
+    <Compile Include="Domain\SportsRepository.cs" />
+    <Compile Include="Domain\TeamRolesRepository.cs" />
+    <Compile Include="Domain\TeamsRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,10 +153,10 @@
       <DependentUpon>202005292017153_PopulateTeamRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Folder\Achievement.cs" />
-    <Compile Include="Folder\Sex.cs" />
+    <Compile Include="Classes\Achievement.cs" />
+    <Compile Include="Classes\Sex.cs" />
     <Compile Include="Models\TeamRole.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Models\Athlete.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\Team.cs" />
@@ -161,6 +167,7 @@
     <Compile Include="ViewModels\AthletesListViewModel.cs" />
     <Compile Include="ViewModels\TeamDetailsViewModel.cs" />
     <Compile Include="ViewModels\TeamFormViewModel.cs" />
+    <Compile Include="ViewModels\TeamListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ApplicationDb.mdf" />
@@ -179,6 +186,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -240,6 +248,7 @@
       <DependentUpon>202005292017153_PopulateTeamRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

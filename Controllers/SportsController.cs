@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FanGuide.Domain;
 using FanGuide.Models;
 using FanGuide.ViewModels;
 
@@ -10,16 +11,16 @@ namespace FanGuide.Controllers
 {
     public class SportsController : Controller
     {
-        private ApplicationDbContext _context;
+        private IRepository<Sport> Sports_db;
 
         public SportsController()
         {
-            _context = new ApplicationDbContext();
+            Sports_db = new SportsRepository();
         }
         // GET: Sports
         public ActionResult Index()
         {
-            var sports = _context.Sports.ToList();
+            var sports = Sports_db.GetList();
             return View(sports);
         }
 
@@ -39,7 +40,7 @@ namespace FanGuide.Controllers
                 return View("SportForm");
             }
 
-            bool nameAlreadyExists = _context.Sports.SingleOrDefault(s => s.Name == sport.Name) != null;
+            bool nameAlreadyExists = Sports_db.GetList().SingleOrDefault(s => s.Name == sport.Name) != null;
 
             if (nameAlreadyExists)
             {
@@ -47,8 +48,8 @@ namespace FanGuide.Controllers
                 return View("SportForm");
             }
 
-            _context.Sports.Add(sport);
-            _context.SaveChanges();
+            Sports_db.Create(sport);
+            Sports_db.Save();
 
             return RedirectToAction("Index", "Sports");
         }
@@ -57,7 +58,7 @@ namespace FanGuide.Controllers
         // GET: Sports/Edit/5
         public ActionResult Edit(int id)
         {
-            var sport = _context.Sports.SingleOrDefault(x => x.Id == id);
+            var sport = Sports_db.Get(id);
 
             if (sport == null)
                 return HttpNotFound();
@@ -73,10 +74,8 @@ namespace FanGuide.Controllers
                 return View("SportForm", sport);
             }
 
-            var sportInDb = _context.Sports.Single(s => s.Id == sport.Id);
-            sportInDb.Name = sport.Name;
-
-            _context.SaveChanges();
+            Sports_db.Update(sport);
+            Sports_db.Save();
             return RedirectToAction("Index", "Sports");
         }
 
@@ -85,13 +84,13 @@ namespace FanGuide.Controllers
 
         public ActionResult Delete(int id)
         {
-            var sport = _context.Sports.SingleOrDefault(x => x.Id == id);
+            var sport = Sports_db.Get(id);
 
             if (sport == null)
                 return HttpNotFound();
 
-            _context.Sports.Remove(sport);
-            _context.SaveChanges();
+            Sports_db.Delete(id);
+            Sports_db.Save();
             return RedirectToAction("Index", "Sports");
         }
     }
