@@ -20,6 +20,6 @@ namespace FanGuide.ViewModels
                 return Enum.GetNames(typeof(SexType)).Select(e => new SelectListItem() { Text = e, Value = e });
             }
         }
-        public Athlete Athlete;
+        public Athlete Athlete { get; set; }
     }
 }
