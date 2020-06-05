@@ -1,4 +1,4 @@
-﻿namespace FanGuide.Folder
+﻿namespace FanGuide.HelperClasses
 {
     public class Sex
     {

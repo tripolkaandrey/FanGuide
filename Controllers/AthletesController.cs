@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using FanGuide.Domain;
-using FanGuide.Folder;
+using FanGuide.HelperClasses;
 using FanGuide.Models;
 using FanGuide.ViewModels;
 

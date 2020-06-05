@@ -1,4 +1,6 @@
-﻿namespace FanGuide.Folder
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FanGuide.HelperClasses
 {
     public class Achievement
     {
@@ -7,8 +9,11 @@
     }
     public enum AchievementType : byte
     {
+        [Display(Name = "Bronze Medal")]
         BronzeMedal,
+        [Display(Name = "Silver Medal")]
         SilverMedal,
+        [Display(Name = "Gold Medal")]
         GoldMedal,
     }
 }

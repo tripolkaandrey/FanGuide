@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
-using FanGuide.Classes;
+using FanGuide.HelperClasses;
 using FanGuide.Models;
 
 namespace FanGuide.Domain

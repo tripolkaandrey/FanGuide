@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using FanGuide.Folder;
+using FanGuide.HelperClasses;
 using FanGuide.Models;
 
 namespace FanGuide.ViewModels

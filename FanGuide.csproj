@@ -127,7 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Classes\RepositoryHelper.cs" />
+    <Compile Include="HelperClasses\RepositoryHelper.cs" />
     <Compile Include="Controllers\AthletesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SportsController.cs" />
@@ -153,8 +153,8 @@
       <DependentUpon>202005301908133_PopulateTeamRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Classes\Achievement.cs" />
-    <Compile Include="Classes\Sex.cs" />
+    <Compile Include="HelperClasses\Achievement.cs" />
+    <Compile Include="HelperClasses\Sex.cs" />
     <Compile Include="Models\TeamRole.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Models\Athlete.cs" />
