@@ -29,11 +29,11 @@ namespace FanGuide.Controllers
         }
         // GET: Athletes
         [HttpGet]
-        public ActionResult Index(string sortOrder, string search, int? sportId,bool RecordmanSearch = false)
+        public ActionResult Index(string sortOrder, string search, int? sportId,bool recordmanSearch = false)
         {
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-            var athletes = Athletes_db.GetList(x => x.Sport);
+            var athletes = Athletes_db.GetList(x => x.Sport,x => x.Achievements);
             var sports = Sports_db.GetList();
 
             if (!string.IsNullOrEmpty(search))
@@ -47,7 +47,7 @@ namespace FanGuide.Controllers
             {
                 athletes = athletes.Where(s => s.SportId == sportId);
             }
-            if (RecordmanSearch && athletes.Count() != 0)
+            if (recordmanSearch && athletes.Count() != 0)
             {
                 var res = athletes.Select(x => x.Achievements)
                     .Max(x => x.Sum(z => (byte)z.Type));
@@ -65,7 +65,7 @@ namespace FanGuide.Controllers
             }
             var viewModel = new AthletesListViewModel()
             {
-                Athletes = athletes,
+                Athletes = athletes.ToList(),
                 Sports = new SelectList(sports,"Id","Name")
             };
             return View(viewModel);

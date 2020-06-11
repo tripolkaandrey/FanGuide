@@ -11,7 +11,7 @@
         @Html.TextBox("search", "", new { @class = "form-control", style = "display:inline-block;", id = "search-box" })
         @Html.DropDownList("sportId", Model.Sports as SelectList, "Select Sport",
             new { @class = "form-control", style = "display:inline-block;", id = "Sport" })
-        Find Recordman:@Html.CheckBox("RecordmanSearch", new { @class = "form-check-input", style = "display:inline-block;", id = "RecordSearch" })
+        Find Recordman:@Html.CheckBox("recordmanSearch", new { @class = "form-check-input", style = "display:inline-block;", id = "RecordSearch" })
         <input type="submit" value="Search" class="btn btn-primary" style="display:none" />
     </p>
 }
